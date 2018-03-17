@@ -7,6 +7,7 @@
 
 import socket
 from flask import Flask
+from flask import request
 
 
 # ------------------------------
@@ -24,9 +25,14 @@ INDEXHTMLPATH = "./../../index.html"; # The file that is loaded when a GET reque
 # ------------------------------
 # Initializing
 
-# Initialize the TCP socket
+# Initialize and connect the TCP socket
 tcpSocket = socket.socket (socket.AF_INET, socket.SOCK_STREAM);
-tcpSocket.connect ((TCPIP, TCPPORT));
+tcpSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+try:
+    tcpSocket.connect ((TCPIP, TCPPORT));
+except socket.error:
+    tcpSocket.close ();
+    print "Error while connecting!"
 
 # Initialize the Flask app
 flask = Flask (__name__);
@@ -52,8 +58,9 @@ def TCPSend (value):
 def index():
     # Show the color picker
     if (request.method == 'GET'):
-        fileContent = get_file ('INDEXHTMLPATH');
-        return Response (fileContent, mimetype = "text/html");
+        fileContext = open (INDEXHTMLPATH, 'r');
+        fileContent = fileContext.read();
+        return fileContent;
 
     # Listen to incoming POST data (i.e. the colorValue picked from the color picker)
     if (request.method == 'POST'):
@@ -66,4 +73,4 @@ def index():
 # Main
 
 if (__name__ == '__main__'):
-    flask.run (port = 80);
+    flask.run (port = 5000);
