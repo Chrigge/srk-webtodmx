@@ -18,7 +18,7 @@ TCPPORT = 5005;      # The TCP server's port
 TCPBUFFERSIZE = 1024;# The TCP server's buffer size (standard: 1024)
 
 # Flask constants
-INDEXHTMLPATH = ""; # The file that is loaded when a GET request happens on index
+INDEXHTMLPATH = "./../../index.html"; # The file that is loaded when a GET request happens on index
 
 
 # ------------------------------
@@ -41,7 +41,7 @@ def TCPSend (value):
     # Get the server's response and close the socket
     data = tcpSocket.recv (TCPBUFFERSIZE);
     tcpSocket.close ();
-    
+
     return data;
 
 
