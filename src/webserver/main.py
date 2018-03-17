@@ -26,7 +26,7 @@ INDEXHTMLPATH = ""; # The file that is loaded when a GET request happens on inde
 
 # Initialize the TCP socket
 tcpSocket = socket.socket (socket.AF_INET, socket.SOCK_STREAM);
-tcpSocket.connect ((TCPIP, TCPPORT);
+tcpSocket.connect ((TCPIP, TCPPORT));
 
 # Initialize the Flask app
 flask = Flask (__name__);
