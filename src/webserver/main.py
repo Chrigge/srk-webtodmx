@@ -27,13 +27,7 @@ TCPBUFFERSIZE = 1024;# The TCP server's buffer size (standard: 1024)
 # Initializing
 
 # Initialize and connect the TCP socket
-tcpSocket = socket.socket (socket.AF_INET, socket.SOCK_STREAM);
-tcpSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-try:
-    tcpSocket.connect ((TCPIP, TCPPORT));
-except socket.error:
-    tcpSocket.close ();
-    print "Error while connecting!"
+#tcpSocket = TCPConnect();
 
 # Initialize the Flask app
 flask = Flask (__name__);
@@ -43,6 +37,8 @@ flask = Flask (__name__);
 # TCP functionalities
 
 def TCPSend (value):
+    tcpSocket = TCPConnect()
+    """ Sends the given value to the dmx server """
     # Send the value to the server via TCP
     tcpSocket.send (value);
     # Get the server's response and close the socket
@@ -51,6 +47,16 @@ def TCPSend (value):
 
     return data;
 
+def TCPConnect ():
+    """ Initializes the TCP connection with the dmx server """
+    tcpSocket = socket.socket (socket.AF_INET, socket.SOCK_STREAM);
+    tcpSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    try:
+        tcpSocket.connect ((TCPIP, TCPPORT));
+    except socket.error:
+        tcpSocket.close ();
+        print "Error while connecting!"
+    return tcpSocket;
 
 # ------------------------------
 # Flask functionalities
@@ -61,12 +67,15 @@ def index():
     if (request.method == 'GET'):
         return render_template ('html/index.html');
 
-    # Listen to incoming POST data (i.e. the colorValue picked from the color picker)
+# Listen to incoming POST data (i.e. the colorValue picked from the color picker)
+@flask.route('/ajax', methods=['POST'])
+def ajax():
     if (request.method == 'POST'):
-        colorValue = request.form.get('colorValue')
+        colorValue = request.form['colorValue']
         data = TCPSend (colorValue);
         print ("Submitted Color: " + colorValue + "\nServer response:"
                 + data);
+        return ""
 
 
 # ------------------------------

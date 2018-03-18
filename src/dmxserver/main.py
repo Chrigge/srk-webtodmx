@@ -10,11 +10,22 @@ tcpSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 tcpSocket.bind ((TCPIP, TCPPORT))
 tcpSocket.listen (1);
 
-tcpConn, tcpAddr = tcpSocket.accept();
-print 'Connection adress: ', tcpAddr
-while (1):
-    data = tcpConn.recv (TCPBUFFERSIZE);
-    if (not data): break;
-    print 'Received data: ', data
-    tcpConn.send (data);
-tcpConn.close();
+
+def acceptConnections():
+    tcpConn, tcpAddr = tcpSocket.accept();
+    print 'Connection adress: ', tcpAddr
+    while (1):
+        data = tcpConn.recv (TCPBUFFERSIZE);
+        if (not data): break;
+        print 'Received data: ', data
+        tcpConn.send (data);
+    tcpConn.close();
+
+
+while 1:
+    acceptConnections();
+
+
+
+
+

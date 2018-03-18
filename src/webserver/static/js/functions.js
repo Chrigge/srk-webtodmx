@@ -8,6 +8,26 @@ function startColorwheel(){
 
      // Define what to do when the color changes
      cw.onchange(function(color){
-         console.log(color.hex);
+         console.log(color.hex)
+         sendPOSTValue (color.hex)
      })
+}
+
+
+// Sends the color data to
+function sendPOSTValue (inputData) {
+    var request = $.ajax ({
+        url: "/ajax",
+        type: "POST",
+        data: { "colorValue":inputData },
+        success: function (result) {
+            console.log (result);
+        }
+    })
+    request.done (function (response, textStatus, jqXHR) {
+        console.log ("Color sent to server (POST)");
+    })
+    request.fail (function (jqXHR, textStatus, errorThrown) {
+        console.error ("Error: " + textStatus, errorThrown);
+    })
 }
