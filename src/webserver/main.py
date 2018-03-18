@@ -1,13 +1,14 @@
-''' webserver/main.py
+""" webserver/main.py
     main file of the web server that hosts the color picker
-    and sends picked colors to the dmx server. '''
+    and sends picked colors to the dmx server. """
 
 # ------------------------------
 # Imports
 
 import socket
+
 from flask import Flask
-from flask import request
+from flask import request, render_template, url_for
 
 
 # ------------------------------
@@ -19,7 +20,7 @@ TCPPORT = 5005;      # The TCP server's port
 TCPBUFFERSIZE = 1024;# The TCP server's buffer size (standard: 1024)
 
 # Flask constants
-INDEXHTMLPATH = "./../../index.html"; # The file that is loaded when a GET request happens on index
+# INDEXHTMLPATH = "/index.html"; # The file that is loaded when a GET request happens on index
 
 
 # ------------------------------
@@ -58,15 +59,14 @@ def TCPSend (value):
 def index():
     # Show the color picker
     if (request.method == 'GET'):
-        fileContext = open (INDEXHTMLPATH, 'r');
-        fileContent = fileContext.read();
-        return fileContent;
+        return render_template ('html/index.html');
 
     # Listen to incoming POST data (i.e. the colorValue picked from the color picker)
     if (request.method == 'POST'):
         colorValue = request.form.get('colorValue')
         data = TCPSend (colorValue);
-        return "<p>Submitted Color: " + colorValue + "<br/>Server response:" + data + '</p>';
+        print ("Submitted Color: " + colorValue + "\nServer response:"
+                + data);
 
 
 # ------------------------------
