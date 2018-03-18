@@ -5,7 +5,8 @@ Tool, mit dem die DMX-Lichtsteuerung crowdsourced werden soll.
 # TODO
 ##### Web-Server:
  - [ ] Color Picker
- - [ ] Farbe per TCP an DMX-Server senden
+ - [x] Farbe per TCP an DMX-Server senden
+ - [ ] Design
 ##### DMX-Server:
- - [ ] TCP-Listen
+ - [x] TCP-Listen
  - [ ] Nachricht in DMX-Signal umwandeln
