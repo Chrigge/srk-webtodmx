@@ -1,5 +1,6 @@
 # srk-webtodmx
 **This is still in very active creation and is not suitable for any kind of general use yet!**
+
 Tool for crowd sourcing DMX lighting control.
 
 # What's this?
@@ -17,24 +18,25 @@ This project consists of two main parts communicating with each other:
 
 # Running
 On the device connected to the light fixture:
-- 1. Start Open Lighting: `olad -l 3` (or look it up here: https://www.openlighting.org/ola/getting-started/using-ola/#How_to_start_olad)
+- 1. Start Open Lighting: `olad -l 3` (or look it up [here](https://www.openlighting.org/ola/getting-started/using-ola/#How_to_start_olad))
 - 2. Start the DMX server: `python src/dmxserver/main.py`
+
 On the device running the web server:
 - 1. Start the web server: `python src/webserver/main.py`
 
 
 # FAQ
-##### Does this work?
+### Does this work?
 If you have a rgb light connected via USB->DMX that listens to channels 0, 1, 2 on universe 0, it *might*. But it probably doesn't yet.
-##### But why?
+### But why?
 Making people interact with events in some way that is more than entering it, looking at something and then leaving makes them more engaged and gives them the feeling to be actually part of it instead of just consuming it.
-##### That's cool, but WHY?
+### That's cool, but WHY?
 Seriously, we started this because we wanted to program something. The nice justification in the previous question's answer was made up after we started working on it.
-##### What does srk stand for?
+### What does srk stand for?
 Schwarz-Rot Kollabs. It's a party in the University of Göttingen's student parliament. We do things. 
 
 # TODO
-### for v0.1
+### For v0.1:
 ##### Web-Server:
  - [ ] Color Picker
  - [x] Send color to DMX server via TCP
