@@ -9,20 +9,21 @@ This project aims to make (real life-)events that use some kind of (static, ambi
 # Getting started
 This project consists of two main parts communicating with each other:
  - webserver: a website that includes a web app with which visitors can pick a color using a color picker which are then send to the dmxserver.
- - dmxserver: a server that listens for incoming signals from the webserver, creates an average of the sent colors and then pushes them to the light fixtures via USB -> DMX.
+ - dmxserver: a server that listens for incoming signals from the webserver, creates an average of the sent colors and then pushes them to the light fixtures via OLA (USB -> DMX).
 
 # Installation
 - 1. Install Python
 - 2. Install the Open Lighting Architecture (OLA): https://www.openlighting.org/ola/getting-started/downloads/
-- 3. Clone this repository to your local machine
+- 3. Patch your lights to universe 1 in OLA
+- 4. Clone this repository to your local machinel
 
 # Running
 On the device connected to the light fixture:
 - 1. Start Open Lighting: `olad -l 3` (or look it up [here](https://www.openlighting.org/ola/getting-started/using-ola/#How_to_start_olad))
-- 2. Start the DMX server: `python src/dmxserver/main.py`
+- 2. Start the DMX server: `python dmxserver/dmxserver.py`
 
 On the device running the web server:
-- 1. Start the web server: `python src/webserver/main.py`
+- 1. Start the web server: `python webserver/webserver.py`
 
 
 # FAQ
@@ -36,14 +37,22 @@ Seriously, we started this because we wanted to program something. The nice just
 Schwarz-Rot Kollabs. It's a party in the University of Göttingen's student parliament. We do things. 
 
 # TODO
+### For v0.1.1
+##### Web-Server
+ - [ ] UI
+ - [ ] Support for multiple lights
+##### DMX-Server
+ - [ ] Accept DMX object templates
+
 ### For v0.1:
 ##### Web-Server:
- - [ ] Color Picker
+ - [x] Color Picker
  - [x] Send color to DMX server via TCP
- - [ ] Design
 ##### DMX-Server:
  - [x] TCP-Listen
  - [x] Send incoming data to the lighting via DMX
 ###### Testing:
- - [ ] Test over network
- - [ ] Test with real life DMX lights
+ - [x] Test over network
+ - [x] Test with real life DMX lights
+ ##### Refactoring
+ - [x] Make the project's structure better
