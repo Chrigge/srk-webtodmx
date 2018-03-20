@@ -15,7 +15,7 @@ from flask import request, render_template, url_for
 # Constants
 
 # TCP constants
-TCPIP = "127.0.0.1"; # The TCP server's IP adress
+TCPIP = "0.0.0.0"; # The TCP server's IP adress
 TCPPORT = 5005;      # The TCP server's port
 TCPBUFFERSIZE = 1024;# The TCP server's buffer size (standard: 1024)
 

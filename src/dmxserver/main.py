@@ -3,7 +3,7 @@ import array
 
 from ola.ClientWrapper import ClientWrapper
 
-TCPIP = "127.0.0.1";
+TCPIP = "0.0.0.0";
 TCPPORT = 5005;
 TCPBUFFERSIZE = 1024;
 
