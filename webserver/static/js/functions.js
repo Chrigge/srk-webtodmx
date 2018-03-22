@@ -9,19 +9,19 @@ function startColorwheel(){
      // Define what to do when the color changes
      cw.onchange(function(color){
          var devID = $( "input[name=devIDPar]" ).val();
-         sendPOSTValue ({"devID": devID, "color": color.hex});
+         sendPOSTValue (devID, color.hex);
      })
 }
 
 
 // Sends the color data to
-function sendPOSTValue (inputData) {
-    console.log(inputData);
+function sendPOSTValue (devID, color) {
+    console.log(devID);
     var request = $.ajax ({
         url: "/ajax",
         type: "POST",
-        data: { "colorValues":inputData,
-                "deviceID":"1" // DELETE THIS
+        data: { "colorValues":color,
+                "deviceID":devID // DELETE THIS
         },
         success: function (result) {
             console.log (result);
@@ -60,7 +60,7 @@ function updateScannerValsXYPos(xPos, yPos){
      $( "input[name=yPos], input[name=yPosRange]" ).val(Math.round(yPos));
 }
 
-function updateScanner2dPanel(axis, valueSet){
+function updateScannerPanel(axis, valueSet){
      valueSet = panelSize / 255.0 * valueSet;// convert midi value to location value
 
      if(axis == "x"){
