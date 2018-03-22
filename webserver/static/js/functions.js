@@ -32,6 +32,7 @@ function sendPOSTValue (inputData) {
     })
 }
 
+// Scanner functions
 function updateScannerValsXPos(event){
      var valueSet = event.target.value;
      $( "input[name=xPos], input[name=xPosRange]" ).val(valueSet);
@@ -45,4 +46,14 @@ function updateScannerValsYPos(event){
 function updateScannerValsBrightness(event){
      var valueSet = event.target.value;
      $( "input[name=brightness], input[name=brightnessRange]" ).val(valueSet);
+}
+
+function create2dPanel(){
+     var panelSize = Math.min(window.innerWidth,window.innerHeight)*0.6;
+     var container = $(".2dPanel")[0];
+     var paper = Raphael(container, panelSize, panelSize);
+     var c = paper.rect(0, 0, panelSize, panelSize, 10);
+     c.node.onclick = function () {
+          c.attr("fill", "red");
+     };
 }
