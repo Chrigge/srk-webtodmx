@@ -17,9 +17,29 @@
      <body onload="startColorwheel();">
           <h1>srk-webtodmx -- Control board</h1>
           <!-- Colorwheel fields -->
-          <div id="colorwheelInput">
-               <div class="colorwheel">
-                    <input type="text">
+          <div class="par">
+               <h2>Example Name PAR</h2>
+               <p>Name: <input type="text" name="name" value="Example Name PAR"/></p>
+               <p>DMX-Channel: <input type="number" name="dmxChannel" value="0" max="1023"></p>
+               <div id="colorwheelInput">
+                    <p>Colour as hex: <input type="text" name="colorwheelInput"></p>
+                    <div class="colorwheel"></div>
+               </div>
+          </div>
+          <div class="scanner">
+               <h2>Example Name Scanner</h2>
+               <p>Name: <input type="text" name="name" value="Example Name Scanner"/></p>
+               <p>DMX-Channel: <input type="number" name="dmxChannel" value="0" max="1023"></p>
+               <div id="scannerVals">
+                    <p>x-Position: <input type="number" name="xPos" min="0" max="255" value="128" onchange="updateScannerValsXPos(event);">
+                                   <input type="range" name="xPosRange" min="0" max="255" value="128" step="1" onchange="updateScannerValsXPos(event);">
+                    </p>
+                    <p>y-Position: <input type="number" name="yPos" min="0" max="255" value="128" onchange="updateScannerValsYPos(event);">
+                                   <input type="range" name="yPosRange" min="0" max="255" value="128" step="1" onchange="updateScannerValsYPos(event);">
+                    </p>
+                    <p>Brightness: <input type="number" name="brightness" min="0" max="255" value="0" onchange="updateScannerValsBrightness(event);">
+                                   <input type="range" name="brightnessRange" min="0" max="255" step="1" value="0" onchange="updateScannerValsBrightness(event);">
+                    </p>
                </div>
           </div>
      </body>

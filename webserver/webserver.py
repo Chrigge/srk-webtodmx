@@ -34,7 +34,7 @@ def ajax():
         print ("Submitted Color: " + colorValue + "\nServer response:"
                 + data);
     return ""
-    
+
 
 
 """ Main """
