@@ -33,9 +33,9 @@ def ajax():
         data = {'deviceID':request.form['deviceID'],
                 'colorValues':request.form['colorValues'] };
         
-        echo = TCPSend (pickle.dump (data));
-        print ("Submitted Color: " + colorValue + "\nServer response:"
-                + data);
+        echo = TCPSend (pickle.dumps (data));
+        print ("Sent data, Server response:"
+                ,pickle.loads(echo));
     return ""
 
 

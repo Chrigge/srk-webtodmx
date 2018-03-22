@@ -8,34 +8,37 @@ universe = 1;                   # DMX universe
 dmx = [0]*512;        # DMX value array
 dmxReservations = [0]*512   # DMX reservation array
 devices = list();               # List of all devices
-currentDid = 0;                 # ID to be applied to the next added device
+currentDid = 1;                 # ID to be applied to the next added device
 
 def AddDevice (device):
     """ Add a device to the device list """
     global currentDid;
-    device.did = currentDid;
+    did = currentDid;
     currentDid += 1;         # Set the device ID
     devices.append (device);
+    print ("Added device %s" % did);
     for i in range (0, device.length):
-        dmxReservations[device.address + i] = device.did;     # Update the DMX array
-    print ("Added device %s" % device.did);
-
+        dmxReservations[device.address + i] = did;     # Update the DMX array
+    return did;
+    
 
 def RemoveDevice (did):
     """ Removes a device via it's device ID. """
     device = getDevice (did);
-    for i in range (device.length):
+    for i in range (0, device.length):
         dmxReservations[device.address + i] = 0;
         devices.remove (device);
 
 
 def GetDevice (did):
     """ Get a device from the list by it's did """
+    did = int (did); # Clean up did 
     for device in devices:
+        print ("D:",device, device.did, did)
         if (device.did == did):
             print ("GetDevice: Found device");
             return device;
-    print ("GetDevice: No device found");
+    print ("GetDevice: No device %s found" % did);
     return None;
 
 def UpdateDevice (did, values):
@@ -66,8 +69,21 @@ def GetDMXArray():
         dmxArray.append(i);
     return dmx;
 
-def PrintReservations():
-    print ("Reservations (channel, ID):");
+def PrintReservations(values=False):
+    """ Debug logging! """
+    """ Print reservation IDs (or values, if values = true) """
+    if (not values):
+        print ("Reservations (channel, ID):");
+    else:
+        print ("Values (channel, value):");
+    l = 0;
     for i in range (0, len (dmxReservations)):
         if (dmxReservations[i] != 0):
-            print (i, dmxReservations[i])
+            l = i;
+    
+    for i in range (0, l+1):
+        if (dmxReservations[i] != 0):
+            x = dmxReservations[i];
+            if (values == True):
+                x = dmx[i]
+            print (i, x)
