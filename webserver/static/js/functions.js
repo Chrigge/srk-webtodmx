@@ -8,14 +8,15 @@ function startColorwheel(){
 
      // Define what to do when the color changes
      cw.onchange(function(color){
-         console.log(color.hex)
-         sendPOSTValue (color.hex)
+         var devID = $( "input[name=devIDPar]" ).val();
+         sendPOSTValue ({"devID": devID, "color": color.hex});
      })
 }
 
 
 // Sends the color data to
 function sendPOSTValue (inputData) {
+    console.log(inputData);
     var request = $.ajax ({
         url: "/ajax",
         type: "POST",
