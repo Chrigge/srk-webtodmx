@@ -4,6 +4,7 @@
 
 """ Imports """
 import sys
+import pickle
 
 from flask import Flask
 from flask import request, render_template, url_for
@@ -29,10 +30,12 @@ def ajax():
     """ Listen to incoming POST data
         (i.e. the colorValue picked from the color picker) """
     if (request.method == 'POST'):
-        colorValue = request.form['colorValue']
-        data = TCPSend (colorValue);
-        print ("Submitted Color: " + colorValue + "\nServer response:"
-                + data);
+        data = {'deviceID':request.form['deviceID'],
+                'colorValues':request.form['colorValues'] };
+        
+        echo = TCPSend (pickle.dumps (data));
+        print ("Sent data, Server response:"
+                ,pickle.loads(echo));
     return ""
 
 

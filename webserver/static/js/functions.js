@@ -19,7 +19,9 @@ function sendPOSTValue (inputData) {
     var request = $.ajax ({
         url: "/ajax",
         type: "POST",
-        data: { "colorValue":inputData },
+        data: { "colorValues":inputData,
+                "deviceID":"1" // DELETE THIS
+        },
         success: function (result) {
             console.log (result);
         }
