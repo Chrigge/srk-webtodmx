@@ -52,8 +52,32 @@ function create2dPanel(){
      var panelSize = Math.min(window.innerWidth,window.innerHeight)*0.6;
      var container = $(".2dPanel")[0];
      var paper = Raphael(container, panelSize, panelSize);
-     var c = paper.rect(0, 0, panelSize, panelSize, 10);
-     c.node.onclick = function () {
-          c.attr("fill", "red");
-     };
+     var bgColor = "black";
+     var panel = paper.rect(0, 0, panelSize, panelSize).attr({fill: bgColor});
+     panel.node.style.cursor = "crosshair";
+
+     var pointerRad = panelSize / 20;
+     var pointer = paper.circle(panelSize / 2,panelSize / 2,pointerRad).attr({"stroke-width":4, stroke:"#fff"});
+
+     panel.drag(
+               function (dx, dy, x, y, event) {
+                    xPos = Math.max(0, x - $(panel.node).offset().left);
+                    xPos = Math.min(xPos, panelSize);
+                    yPos = Math.max(0, y - $(panel.node).offset().top);
+                    yPos = Math.min(yPos, panelSize);
+
+                    console.log("Drag " + dx + " " + dy);
+                    pointer.attr({cx: xPos, cy: yPos});
+               },
+               function (x, y, event) {
+                    console.log("Start");
+
+                    xPos = x - $(panel.node).offset().left;
+                    yPos = y - $(panel.node).offset().top;
+                    pointer.attr({cx: xPos, cy: yPos});
+               },
+               function () {
+                    console.log("Stop");
+               });
+
 }
