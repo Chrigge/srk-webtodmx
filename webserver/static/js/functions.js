@@ -38,11 +38,15 @@ function sendPOSTValue (inputData) {
 function updateScannerValsXPos(event){
      var valueSet = event.target.value;
      $( "input[name=xPos], input[name=xPosRange]" ).val(valueSet);
+
+     updateScanner2dPanel("x", valueSet);
 }
 
 function updateScannerValsYPos(event){
      var valueSet = event.target.value;
      $( "input[name=yPos], input[name=yPosRange]" ).val(valueSet);
+
+     updateScanner2dPanel("y", valueSet);
 }
 
 function updateScannerValsBrightness(event){
@@ -50,36 +54,51 @@ function updateScannerValsBrightness(event){
      $( "input[name=brightness], input[name=brightnessRange]" ).val(valueSet);
 }
 
-function create2dPanel(){
-     var panelSize = Math.min(window.innerWidth,window.innerHeight)*0.6;
-     var container = $(".2dPanel")[0];
-     var paper = Raphael(container, panelSize, panelSize);
-     var bgColor = "black";
-     var panel = paper.rect(0, 0, panelSize, panelSize).attr({fill: bgColor});
-     panel.node.style.cursor = "crosshair";
+function updateScannerValsXYPos(xPos, yPos){
+     $( "input[name=xPos], input[name=xPosRange]" ).val(Math.round(xPos));
+     $( "input[name=yPos], input[name=yPosRange]" ).val(Math.round(yPos));
+}
 
-     var pointerRad = panelSize / 20;
-     var pointer = paper.circle(panelSize / 2,panelSize / 2,pointerRad).attr({"stroke-width":4, stroke:"#fff"});
+function updateScanner2dPanel(axis, valueSet){
+     valueSet = panelSize / 255.0 * valueSet;// convert midi value to location value
+
+     if(axis == "x"){
+          pointer.attr({cx: valueSet});
+     }
+     if(axis == "y"){
+          pointer.attr({cy: valueSet});
+     }
+}
+
+function create2dPanel(){
+     panelSize = Math.min(window.innerWidth,window.innerHeight)*0.6; // panel size, is global variable for cross assignment operations
+     var container = $(".2dPanel")[0]; // draw panel here
+     var paper = Raphael(container, panelSize, panelSize); // initialise Raphael (drawer class) container
+     var bgColor = "black";
+     var panel = paper.rect(0, 0, panelSize, panelSize).attr({fill: bgColor}); // creates rectangular, "xy-panel"
+     panel.node.style.cursor = "crosshair"; // cursor style
+
+     var pointerRad = panelSize / 20; // size of pointer of xy-panel
+     pointer = paper.circle(panelSize / 2,panelSize / 2,pointerRad).attr({"stroke-width":4, stroke:"#fff"}); // creates pointer of xy-panel, is global variable for cross assignment operations
 
      panel.drag(
-               function (dx, dy, x, y, event) {
+               function (dx, dy, x, y, event) { // onmove function
+                    // recalculate position of pointer
                     xPos = Math.max(0, x - $(panel.node).offset().left);
                     xPos = Math.min(xPos, panelSize);
                     yPos = Math.max(0, y - $(panel.node).offset().top);
                     yPos = Math.min(yPos, panelSize);
 
-                    console.log("Drag " + dx + " " + dy);
-                    pointer.attr({cx: xPos, cy: yPos});
-               },
-               function (x, y, event) {
-                    console.log("Start");
+                    pointer.attr({cx: xPos, cy: yPos}); // and assign it
 
+                    updateScannerValsXYPos(255.0 / panelSize * xPos, 255.0 / panelSize * yPos);
+               },
+               function (x, y, event) { // onmousedown function
                     xPos = x - $(panel.node).offset().left;
                     yPos = y - $(panel.node).offset().top;
-                    pointer.attr({cx: xPos, cy: yPos});
                },
-               function () {
-                    console.log("Stop");
+               function () { // onmouseup function
+                    //console.log("Stop");
                });
 
 }
