@@ -13,7 +13,8 @@ function DMXDevice(id, name, DMXModules){
      $.each(DMXModules, buildModules);
 
      function buildModules(moduleName, moduleType){
-          console.log(moduleName + ' ' + moduleType);
+          // console.log(moduleName + ' ' + moduleType); // debug output
+
           if (moduleType == 'colorwheel') {
                builtModules[moduleName] = new ModuleColorwheel(moduleName, div);
                builtModules[moduleName].cw.onchange(function(color){
@@ -202,7 +203,6 @@ function ModuleXYPanel(name, parentDiv, startX = 127, startY = 127){
                     function () { // onmouseup function
                          //console.log("Stop");
                     });
-
      }
 
      // adjust values accordingly onchange of the input or range
