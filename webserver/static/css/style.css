@@ -1,1 +1,14 @@
+.colorwheel{
+     margin-top: 2vh;
+}
 
+.moduleDiv{
+     margin-top: 5vh;
+}
+
+.moduleHeading input{
+     font-size: 2em;
+     border: none;
+     background: transparent;
+     color: #000;
+}
