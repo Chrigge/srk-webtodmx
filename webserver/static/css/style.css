@@ -20,6 +20,80 @@ body{
      text-decoration: none;
 }
 
+.mainNav{
+     display: inline-block;
+     vertical-align: top;
+     position: sticky;
+     top: 5%;
+     font-size: 1.3em;
+     border: 1px black solid;
+}
+
+.mainNav a{
+     display: block;
+     color: black;
+     text-decoration: none;
+     background-color: #ddd;
+     padding: 3%;
+}
+
+.mainNav a:hover {
+     background-color: #bbb;
+}
+
+.mainNavHeading{
+     padding: 3%;
+     font-weight: bold;
+     display: block;
+     text-align: left;
+}
+
+.mainNavCheckbox{
+     display: block;
+     padding: 3%;
+}
+
+/* Hide the link that should open and close the mainNav on small screens */
+.mainNav .icon {
+    display: none;
+}
+
+/* When the screen is less than 600 pixels wide, hide all links. Show the link that contains should open and close the mainNav (.icon) */
+@media screen and (max-width: 600px) {
+      .mainNav{
+           display: block;
+           position: static;
+     }
+      .mainNav a {display: none;}
+      .mainNav a.icon {
+        display: block;
+      }
+     .mainNavHeading{
+          display: inline-block;
+     }
+     .mainNavCheckbox{
+          display: inline-block;
+          float: right;
+     }
+}
+
+/* The "responsive" class is added to the mainNav with JavaScript when the user clicks on the icon. This class makes the mainNav look good on small screens */
+@media screen and (max-width: 600px) {
+ .mainNav.responsive {position: relative;}
+ .mainNav.responsive a {
+   float: none;
+   display: block;
+   text-align: left;
+ }
+}
+
+#DMXDevicesContainer{
+     display: inline-block;
+     height: 100%;
+     margin-left: 2%;
+     background-color: #eee;
+}
+
 .deviceDiv{
      margin: 3%;
 }
@@ -44,52 +118,10 @@ body{
      margin: 2%;
 }
 
-.rangeFader{
-     margin: 2%;
-}
-
 .panelDiv{
      margin: 2%;
 }
 
-#mainNav{
-     /* width: 10%; */
-     height: 100%;
-     display: inline-block;
-     vertical-align: top;
-     position: sticky;
-     top: 5%;
-     font-size: 1.3em;
-     border: 1px black solid;
-}
-
-#mainNav a{
-     display: block;
-     color: black;
-     text-decoration: none;
-     background-color: #ddd;
-     padding: 3%;
-}
-
-#mainNav a:hover {
-     background-color: #bbb;
-}
-
-.mainNavHeading{
-     padding: 3%;
-     font-weight: bold;
-     display: block;
-     text-align: left;
-}
-
-.mainNavCheckbox{
-     display: block;
-     padding: 3%;
-}
-
-#DMXDevicesContainer{
-     display: inline-block;
-     height: 100%;
-     margin-left: 2%;
-     background-color: #eee;
+.rangeFader{
+     margin: 2%;
 }

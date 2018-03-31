@@ -21,7 +21,7 @@ function sendPOSTValue (inputValue) {
 
 function makeMenu(){
      // initiate click function: only show the element clicked on if wanted
-     var menuItems = $('#mainNav a');
+     var menuItems = $('#mainNav .menuEntry');
      // is the show all devices checkbox clicked?
      var showAllDevs = $('#allDevs').prop('checked');
 
@@ -31,7 +31,7 @@ function makeMenu(){
      }
      else {
           $.each(menuItems, makeClickShowOne); //setup event listener
-          if ( window.location.hash != '' ){ //check whether an item is addressed
+          if ( window.location.hash !== '' ){ //check whether an item is addressed
                displayItem(window.location.hash); // display it
           }
           else {
@@ -54,8 +54,14 @@ function makeMenu(){
      }
 
      function displayItem(item){ // displays the item given
-                    $('.menuItem').css('display','none'); //hide all other items
+                    $('.menuItem').css('display','none'); //hide all menuItems
                     $(item).css('display','inline-block'); //display the one clicked
                     $('html,body').scrollTop(0); //scroll to the top of the page
      }
+}
+
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function makeMobilePossible(){
+     var nav = $("#mainNav");
+     $(nav).toggleClass("responsive")
 }

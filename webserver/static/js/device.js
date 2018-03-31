@@ -25,7 +25,8 @@ function DMXDevice(id, name, DMXModules){
 
      var menuEntry = document.createElement('a'); //create entry in menu
      $(menuEntry).html(name);
-     $(menuEntry).attr('href', '#' + domId)
+     $(menuEntry).addClass('menuEntry');
+     $(menuEntry).attr('href', '#' + domId);
 
      $('#mainNav').append(menuEntry);
 

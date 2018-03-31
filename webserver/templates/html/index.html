@@ -15,15 +15,16 @@
           <script src="{{ url_for ('static', filename='js/functions.js') }}" charset="utf-8"></script>
           <script src="{{ url_for ('static', filename='js/device.js') }}" charset="utf-8"></script>
 
-           <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+           <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
           <title>SRK Web to DMX</title>
      </head>
      <body>
           <a href='/' class='mainHeadingLink'><div class="mainHeading">srk web to dmx</div></a>
-          <nav id='mainNav'>
+          <nav id='mainNav' class='mainNav'>
                <span class='mainNavHeading'>DMX devices:</span>
                <span class='mainNavCheckbox'>Show all <input type="checkbox" id='allDevs' onchange='makeMenu();' /></span>
+               <a href="javascript:void(0);" class="icon" onclick="makeMobilePossible()">&#9776;</a>
           </nav>
           <div id="DMXDevicesContainer">
           </div>
