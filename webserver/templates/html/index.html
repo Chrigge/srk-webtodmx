@@ -15,14 +15,24 @@
           <script src="{{ url_for ('static', filename='js/functions.js') }}" charset="utf-8"></script>
           <script src="{{ url_for ('static', filename='js/device.js') }}" charset="utf-8"></script>
 
-          <title>srk-webtodmx -- Control board</title>
+           <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+
+          <title>SRK Web to DMX</title>
      </head>
-     <body onload="//startColorwheel(); create2dPanel();">
-          <h1>srk-webtodmx -- Control board</h1>
+     <body>
+          <a href='/' class='mainHeadingLink'><div class="mainHeading">srk web to dmx</div></a>
+          <nav id='mainNav'>
+               <span class='mainNavHeading'>DMX devices:</span>
+               <span class='mainNavCheckbox'>Show all <input type="checkbox" id='allDevs' onchange='makeMenu();' /></span>
+          </nav>
           <div id="DMXDevicesContainer">
           </div>
           <script type="text/javascript">
                var myDMXDevice = new DMXDevice(1, "myDMXDevice", {'lights': 'colorwheel', 'rawRange': 'raw', '2dMove': 'xyPanel', '2dMove2': 'xyPanel'});
+               var myDMXDevice = new DMXDevice(2, "anotherDMXDevice", {'rawRange': 'raw', '2dMove': 'xyPanel', '2dMove2': 'xyPanel'});
+
+               // permanent functions
+               makeMenu();
           </script>
      </body>
 </html>

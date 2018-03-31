@@ -8,9 +8,32 @@
 function DMXDevice(id, name, DMXModules){
      var builtModules = {};
 
-     var div = document.getElementById('DMXDevicesContainer'); // creating div in vanilla JS, is cleaner, more addressable solution
+     var parentDiv = document.getElementById('DMXDevicesContainer');
+     var div = document.createElement('div'); // creating div in vanilla JS, is cleaner, more addressable solution
+     var domId = 'devId-' + id; // id of the div, defined by device id
+     $(div).addClass('menuItem deviceDiv');
+     $(div).attr('id', domId);
+     $(parentDiv).append(div);
 
-     $.each(DMXModules, buildModules);
+     var heading = document.createElement('div'); //make heading
+     $(heading).addClass('deviceHeading');
+     var headingInput = document.createElement('input'); //with editable input as title of device
+     $(headingInput).attr('type', 'text');
+     $(headingInput).val(name);
+     $(heading).append(headingInput);
+     $(div).append(heading);
+
+     var menuEntry = document.createElement('a'); //create entry in menu
+     $(menuEntry).html(name);
+     $(menuEntry).attr('href', '#' + domId)
+
+     $('#mainNav').append(menuEntry);
+
+     heading.onkeyup = function(){ //bind devices name to menu entry
+          $(menuEntry).html($(headingInput).val());
+     }
+
+     $.each(DMXModules, buildModules); // go through each module and build the modules
 
      function buildModules(moduleName, moduleType){
           // console.log(moduleName + ' ' + moduleType); // debug output
@@ -60,15 +83,20 @@ function ModuleColorwheel(name, parentDiv){
      var heading = $('<div class="moduleHeading colorwheelHeading"><input type="text" value="'+name+'"/></div>');
 
      //create label, div and input and set their attributes, append them to parent div
+     var inputDiv = document.createElement('div');
+     $(inputDiv).addClass('colorwheelInput');
+
      var colorwheelLabel = document.createTextNode('Color (hex): ');
 
      var colorwheelInput = document.createElement('input');
      $(colorwheelInput).attr('type','text');
 
+     $(inputDiv).append(colorwheelLabel, colorwheelInput);
+
      var colorwheelDiv = document.createElement('div');
      $(colorwheelDiv).addClass('colorwheel');
 
-     $(div).append(heading, colorwheelLabel, colorwheelInput, colorwheelDiv);
+     $(div).append(heading, inputDiv, colorwheelDiv);
 
      // Responsive sizing of the color wheel
      var colorwheelSize = Math.min(window.innerWidth,window.innerHeight)*0.6;
@@ -121,6 +149,7 @@ function ModuleXYPanel(name, parentDiv, startX = 127, startY = 127){
 
      // create xy panel
      var panelDiv = document.createElement('div');
+     $(panelDiv).addClass('panelDiv');
      $(div).append(panelDiv);
 
      var  panelSize,
@@ -154,7 +183,7 @@ function ModuleXYPanel(name, parentDiv, startX = 127, startY = 127){
           $(input).add($(range)).val(startVal);
 
           var irDiv = document.createElement('div');
-          $(irDiv).addClass(divClass);
+          $(irDiv).addClass(divClass + ' rangeFader');
           $(irDiv).append(label, input, range);
 
           return [input, range, irDiv];
@@ -279,6 +308,9 @@ function ModuleRaw(name, parentDiv, startVal = 127){
      var label = document.createTextNode(name + ': ');
 
      // create changable inputs
+     var inputsDiv = document.createElement('div');
+     $(inputsDiv).addClass('rangeFader');
+
      var input = document.createElement('input');
      $(input).attr('type','number');
 
@@ -291,7 +323,9 @@ function ModuleRaw(name, parentDiv, startVal = 127){
      $(input).add($(range)).attr('step', '1');
      $(input).add($(range)).val(startVal);
 
-     $(div).append(heading, label, input, range);
+     $(inputsDiv).append(label, input, range);
+
+     $(div).append(heading, inputsDiv);
 
      // event handlers for changes
      input.onchange = function(){

@@ -1,14 +1,95 @@
-.colorwheel{
-     margin-top: 2vh;
+@font-face {
+    font-family: titleFont;
+    src: url("Amethyst.ttf");
+}
+
+body{
+     background-color: #eee;
+     font-family: 'Roboto';
+}
+
+.mainHeading{
+     font-size: 2em;
+     background-color: #eee;
+     padding: 1.5%;
+     color: black;
+     font-family: titleFont;
+}
+
+.mainHeadingLink{
+     text-decoration: none;
+}
+
+.deviceDiv{
+     margin: 3%;
 }
 
 .moduleDiv{
-     margin-top: 5vh;
+     margin: 0% 5% 5% 5%;
 }
 
-.moduleHeading input{
+.moduleHeading input, .deviceHeading input {
      font-size: 2em;
      border: none;
      background: transparent;
      color: #000;
+     margin: 2% 2% 2% 0%;
+}
+
+.colorwheel{
+     margin: 2%;
+}
+
+.colorwheelInput{
+     margin: 2%;
+}
+
+.rangeFader{
+     margin: 2%;
+}
+
+.panelDiv{
+     margin: 2%;
+}
+
+#mainNav{
+     /* width: 10%; */
+     height: 100%;
+     display: inline-block;
+     vertical-align: top;
+     position: sticky;
+     top: 5%;
+     font-size: 1.3em;
+     border: 1px black solid;
+}
+
+#mainNav a{
+     display: block;
+     color: black;
+     text-decoration: none;
+     background-color: #ddd;
+     padding: 3%;
+}
+
+#mainNav a:hover {
+     background-color: #bbb;
+}
+
+.mainNavHeading{
+     padding: 3%;
+     font-weight: bold;
+     display: block;
+     text-align: left;
+}
+
+.mainNavCheckbox{
+     display: block;
+     padding: 3%;
+}
+
+#DMXDevicesContainer{
+     display: inline-block;
+     height: 100%;
+     margin-left: 2%;
+     background-color: #eee;
 }
