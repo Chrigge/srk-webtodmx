@@ -26,15 +26,7 @@ On the device running the web server:
 - 1. Start the web server: `python webserver/webserver.py`
 
 
-# FAQ
-### Does this work?
-If you have a rgb light connected via USB->DMX that listens to channels 0, 1, 2 on universe 0, it *might*. But it probably doesn't yet.
-### But why?
-Making people interact with events in some way that is more than entering it, looking at something and then leaving makes them more engaged and gives them the feeling to be actually part of it instead of just consuming it.
-### That's cool, but WHY?
-Seriously, we started this because we wanted to program something. The nice justification in the previous question's answer was made up after we started working on it.
-### What does srk stand for?
-Schwarz-Rot Kollabs. It's a party in the University of Göttingen's student parliament. We do things. 
+
 
 # TODO
 ### For v0.1.1
